@@ -23,6 +23,10 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* AJUSTE DA IMAGEM DA CAPA */
+        .img-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
+        .img-capa { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 3px solid var(--gold); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--navy); }
         h1 { font-size: 2.2rem; margin-bottom: 10px; text-align: center; line-height: 1.2; }
         h2 { border-left: 5px solid var(--gold); padding-left: 15px; margin: 25px 0; font-size: 1.6rem; }
@@ -56,7 +60,7 @@
 <div id="workbook">
     <div class="progress-bar"><div id="fill"></div></div>
     
-       <div class="viewport" id="view">
+    <div class="viewport" id="view">
         <div class="page active" id="p-capa">
             <div class="img-container"><img src="mentora.jpg" class="img-capa"></div>
             <p style="text-align:center; font-weight:bold; color:var(--gold); letter-spacing: 2px;">E-BOOK</p>
@@ -286,7 +290,7 @@
         } else alert("Senha incorreta!");
     }
 
-    function saveData(d) { localStorage.setItem('joyce_txt_' + d, document.getElementById('text-day-' + d).value); }
+    function saveData(d) { localStorage.setItem('joyce_txt_' + i, document.getElementById('text-day-' + d).value); }
     function resetProgress() { if(confirm("Reiniciar tudo?")) { localStorage.clear(); location.reload(); } }
 
     window.onload = () => {
@@ -297,7 +301,10 @@
         }
         for(let i=1; i<=21; i++) {
             let s = localStorage.getItem('joyce_txt_' + i);
-            if(s) document.getElementById('text-day-' + i).value = s;
+            if(s) {
+                let el = document.getElementById('text-day-' + i);
+                if(el) el.value = s;
+            }
         }
     };
 </script>
