@@ -60,12 +60,9 @@
         
         <div class="page active" id="p0">
             <div class="welcome-screen">
-                <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=800" class="img-capa">
-                <h1>Bem-vinda à sua Metamorfose</h1>
-                <p>Você está prestes a iniciar uma jornada de 21 dias que irá reprogramar a forma como você sente, decide e age.</p>
-                <div style="background:#f1f5f9; padding:20px; border-radius:10px; margin:20px 0;">
-                    <p><strong>Dica:</strong> O seu progresso é salvo automaticamente. Você pode sair e voltar de onde parou a qualquer momento.</p>
-                </div>
+                <img src="minha-foto?auto=format&fit=crop&w=800" class="img-capa">
+                <h1>Bem-vinda à sua Evolução</h1>
+                <p>Reprograme seu cérebro em 21 dias. Seu progresso será salvo automaticamente.</p>
                 <button class="btn btn-next" style="width:100%" onclick="move(1)">Começar Jornada Agora</button>
             </div>
         </div>
@@ -75,19 +72,20 @@
         <div class="page" id="p22">
             <div class="final-screen">
                 <h1 style="color:var(--gold)">Jornada Concluída!</h1>
-                <p>Parabéns por completar os 21 dias. Você provou para o seu cérebro que você detém o comando.</p>
+                <p>Parabéns por completar os 21 dias. O comando agora é seu.</p>
                 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800" class="img-capa" style="height:200px">
-                <p>Este é apenas o começo da sua nova arquitetura mental. O próximo passo é o aprofundamento individual.</p>
+                
                 <a href="https://wa.me/5519983578989" target="_blank" style="text-decoration:none">
                     <button class="btn btn-next" style="width:100%; background:var(--gold)">Agendar Minha Mentoria Individual</button>
                 </a>
-                <button class="btn btn-prev" style="margin-top:20px; width:100%" onclick="restart()">Reiniciar Jornada (Limpar Progresso)</button>
+                
+                <button class="btn btn-prev" style="margin-top:20px; width:100%" onclick="restart()">Reiniciar Jornada</button>
             </div>
         </div>
 
     </div>
 
-    <div class="controls" id="nav-controls">
+    <div class="controls" id="nav-controls" style="display:none;">
         <button class="btn btn-prev" onclick="move(-1)" id="bPrev">Anterior</button>
         <span id="pCount" style="font-weight: bold; color:var(--navy)">1 / 21</span>
         <button class="btn btn-next" onclick="move(1)" id="bNext">Próximo</button>
@@ -97,58 +95,44 @@
 <script>
     let cur = 0;
     const totalDays = 21;
-    const totalPages = 22; // De 0 a 22
+    const totalPages = 22;
 
     const conteudos = [
-        { t: "Dia 1: Neuroplasticidade", c: "Seu cérebro não é fixo. Hoje, entenda que cada pensamento novo cria uma trilha física na sua mente.", d: "Escreva uma crença limitante que você tem sobre si mesma e transforme-a em uma afirmação lógica." },
+        { t: "Dia 1: Neuroplasticidade", c: "Seu cérebro não é fixo. Entenda que cada pensamento novo cria uma trilha física na sua mente.", d: "Escreva uma crença limitante que você tem sobre si mesma e transforme-a em uma afirmação lógica." },
         { t: "Dia 2: O Sequestro da Amígdala", c: "Quando você se estressa, sua amígdala 'rouba' o comando do cérebro. O segredo é a pausa.", d: "Descreva um momento recente onde a emoção venceu a razão. O que você faria diferente?" },
         { t: "Dia 3: Dopamina Barata", c: "O vício em notificações drena sua energia. Hoje focamos em proteger sua atenção.", d: "Fique 2 horas sem olhar o celular hoje e registre como sua ansiedade se comportou." },
-        { t: "Dia 4: O Nervo Vago", c: "O nervo vago é o freio do seu estresse. Aprender a respirar é aprender a se acalmar sob pressão.", d: "Pratique a respiração 4-7-8 por 5 minutos e descreva a sensação física agora." },
-        { t: "Dia 5: Ciclo de Recompensa", c: "Todo hábito tem um gatilho. Se você mudar o gatilho, muda o destino.", d: "Identifique o gatilho que te faz comer doce ou procrastinar. Qual é o sinal?" },
+        { t: "Dia 4: O Nervo Vago", c: "O nervo vago é o freio do seu estresse. Aprender a respirar é aprender a se acalmar.", d: "Pratique a respiração 4-7-8 por 5 minutos e descreva a sensação física agora." },
+        { t: "Dia 5: Ciclo de Recompensa", c: "Todo hábito tem um gatilho. Se você mudar o gatilho, muda o destino.", d: "Identifique o gatilho que te faz procrastinar. Qual é o sinal?" },
         { t: "Dia 6: Mielinização", c: "A repetição isola os neurônios. Quanto mais você repete, mais fácil fica agir corretamente.", d: "Qual habilidade nova você vai repetir hoje, mesmo que sinta preguiça?" },
-        { t: "Dia 7: Fadiga de Decisão", c: "Decidir cansa. Use suas manhãs para o que é difícil e deixe o automático para a noite.", d: "Escolha sua roupa e refeições para amanhã ainda hoje. Como isso libera sua mente?" },
-        { t: "Dia 8: Cortisol vs Ocitocina", c: "O estresse libera cortisol. O abraço e a conexão liberam ocitocina, o antídoto natural.", d: "Tenha uma conversa profunda com alguém hoje. Como isso mudou seu humor?" },
-        { t: "Dia 9: Higiene do Sono", c: "Seu cérebro se limpa à noite. Sem sono, você acorda com o cérebro 'sujo' de toxinas.", d: "Desligue as telas 1 hora antes de dormir hoje. Anote se o despertar foi melhor." },
-        { t: "Dia 10: Viés de Confirmação", c: "Nós buscamos o que já acreditamos. Se você se acha incapaz, seu cérebro vai ignorar suas vitórias.", d: "Liste 3 sucessos pequenos que você teve hoje e que sua mente tentou ignorar." },
-        { t: "Dia 11: O Córtex Pré-Frontal", c: "Ele é o CEO da sua vida. Mas ele precisa de glicose e descanso para trabalhar bem.", d: "Identifique uma tarefa que você adiou. Divida-a em 3 partes minúsculas." },
-        { t: "Dia 12: Sistema de Luta ou Fuga", c: "Seu corpo não sabe a diferença entre um leão e um boleto atrasado.", d: "Quando sentir medo hoje, pergunte: 'Há um risco real de vida ou é apenas meu ego?'" },
-        { t: "Dia 13: Memória Muscular", c: "O corpo aprende antes da mente consciente em muitos casos.", d: "Tente realizar uma tarefa cotidiana com a mão não dominante. Observe seu foco aumentar." },
-        { t: "Dia 14: Neurotransmissores", c: "Serotonina e bem-estar. O que você come afeta como você sente.", d: "Coma algo nutritivo e evite processados por 24h. Note a clareza mental." },
-        { t: "Dia 15: O Poder do Não", c: "Cada 'sim' para os outros é um 'não' para os seus objetivos neurais.", d: "Diga um 'não' educado para algo que drena seu tempo hoje." },
-        { t: "Dia 16: Visualização Ativa", c: "O cérebro não diferencia o real do imaginado com clareza total.", d: "Feche os olhos e visualize seu sucesso por 2 minutos. O que você está sentindo?" },
-        { t: "Dia 17: Resiliência Neural", c: "Cair e levantar fortalece as conexões de persistência.", d: "Lembre de um fracasso e escreva qual foi o aprendizado biológico dele." },
-        { t: "Dia 18: Foco e Atenção", c: "A multitarefa é um mito. Ela apenas alterna o foco e cansa o cérebro.", d: "Trabalhe em uma única coisa por 25 minutos sem interrupções." },
-        { t: "Dia 19: Linguagem e Pensamento", c: "As palavras que você usa moldam a estrutura da sua realidade.", d: "Troque a frase 'Eu tenho que' por 'Eu escolho'. Como isso muda seu peso interno?" },
-        { t: "Dia 20: Empatia e Neurônios Espelho", c: "Nós imitamos o comportamento de quem está ao nosso redor.", d: "Observe alguém que você admira. Tente imitar a postura dela por 10 minutos." },
-        { t: "Dia 21: A Nova Arquitetura", c: "Você chegou ao fim do ciclo básico. Sua mente não é mais a mesma de 21 dias atrás.", d: "Qual é o seu próximo grande compromisso com sua evolução? Assine aqui embaixo." }
+        { t: "Dia 7: Fadiga de Decisão", c: "Decidir cansa. Use suas manhãs para o que é difícil.", d: "Escolha sua roupa para amanhã ainda hoje. Como isso libera sua mente?" },
+        { t: "Dia 8: Cortisol vs Ocitocina", c: "O estresse libera cortisol. O abraço e a conexão liberam ocitocina.", d: "Tenha uma conversa profunda com alguém hoje. Como isso mudou seu humor?" },
+        { t: "Dia 9: Higiene do Sono", c: "Seu cérebro se limpa à noite. Sem sono, você acorda com toxinas acumuladas.", d: "Desligue as telas 1 hora antes de dormir hoje. Anote se o despertar foi melhor." },
+        { t: "Dia 10: Viés de Confirmação", c: "Nós buscamos o que já acreditamos. Não ignore suas vitórias.", d: "Liste 3 sucessos pequenos que você teve hoje." },
+        { t: "Dia 11: O Córtex Pré-Frontal", c: "Ele é o CEO da sua vida. Precisa de glicose e descanso.", d: "Divida uma tarefa difícil em 3 partes minúsculas hoje." },
+        { t: "Dia 12: Luta ou Fuga", c: "Seu corpo não sabe a diferença entre um perigo real e um estresse mental.", d: "Pergunte hoje: 'Há um risco real de vida ou é apenas meu ego?'" },
+        { t: "Dia 13: Memória Muscular", c: "O corpo aprende antes da mente consciente.", d: "Tente realizar uma tarefa cotidiana com a mão não dominante." },
+        { t: "Dia 14: Neurotransmissores", c: "O que você come afeta como você sente. Cuide da sua química.", d: "Evite alimentos processados por 24h. Note a clareza mental." },
+        { t: "Dia 15: O Poder do Não", c: "Cada 'sim' para os outros pode ser um 'não' para você.", d: "Diga um 'não' educado para algo que drena seu tempo hoje." },
+        { t: "Dia 16: Visualização Ativa", c: "O cérebro não diferencia o real do imaginado perfeitamente.", d: "Visualize seu maior objetivo por 2 minutos. O que você sente?" },
+        { t: "Dia 17: Resiliência Neural", c: "Fracassos são apenas dados para o seu cérebro aprender.", d: "Escreva qual foi o aprendizado de um erro recente." },
+        { t: "Dia 18: Foco Único", c: "A multitarefa é um mito que cansa o cérebro.", d: "Trabalhe em uma única coisa por 25 minutos sem interrupções." },
+        { t: "Dia 19: Auto-fala Profética", c: "As palavras que você usa moldam sua realidade neural.", d: "Troque 'Eu tenho que' por 'Eu escolho'. Note a diferença." },
+        { t: "Dia 20: Neurônios Espelho", c: "Nós imitamos quem admiramos.", d: "Observe alguém de sucesso e tente imitar a postura dela hoje." },
+        { t: "Dia 21: A Nova Arquitetura", c: "Você concluiu o ciclo. Sua mente está expandida.", d: "Qual o seu próximo compromisso com sua evolução?" }
     ];
 
-    // Gerar páginas dinamicamente
     const container = document.getElementById('content');
     conteudos.forEach((item, index) => {
         let i = index + 1;
         let div = document.createElement('div');
         div.id = 'p' + i;
         div.className = 'page';
-        div.innerHTML = `
-            <h2>${item.t}</h2>
-            <p>${item.c}</p>
-            <div class="challenge-box">
-                <h3 style="margin-top:0; color:var(--gold);">🎯 Desafio Prático</h3>
-                <p>${item.d}</p>
-                <textarea rows="3" id="text${i}" placeholder="Registre sua resposta aqui..."></textarea>
-                <button class="btn btn-finish" onclick="finishChallenge(${i})">Finalizar Desafio</button>
-            </div>
-        `;
+        div.innerHTML = `<h2>${item.t}</h2><p>${item.c}</p><div class="challenge-box"><h3 style="margin-top:0; color:var(--gold);">🎯 Desafio Prático</h3><p>${item.d}</p><textarea rows="3" id="text${i}" placeholder="Registre sua reflexão..."></textarea><button class="btn btn-finish" onclick="finishChallenge(${i})">Finalizar Desafio</button></div>`;
         container.appendChild(div);
     });
 
     function finishChallenge(id) {
-        const text = document.getElementById('text'+id).value;
-        if(text.length < 5) {
-            alert("Por favor, registre sua reflexão antes de finalizar!");
-            return;
-        }
+        if(document.getElementById('text'+id).value.length < 5) return alert("Escreva um pouco mais!");
         document.getElementById('congrats-popup').style.display = 'block';
     }
 
@@ -161,27 +145,16 @@
         document.getElementById('p'+cur).classList.remove('active');
         cur += step;
         if(cur < 0) cur = 0; if(cur > totalPages) cur = totalPages;
-        
         document.getElementById('p'+cur).classList.add('active');
-        
-        // Salvar progresso no navegador
-        localStorage.setItem('joyce_workbook_page', cur);
-
+        localStorage.setItem('joyce_page', cur);
         updateUI();
     }
 
     function updateUI() {
         const fill = (cur / totalDays) * 100;
         document.getElementById('fill').style.width = (cur > totalDays ? 100 : fill) + '%';
-        
-        // Controle de visibilidade da barra de navegação
-        const nav = document.getElementById('nav-controls');
-        nav.style.display = (cur === 0 || cur === totalPages) ? 'none' : 'flex';
-        
-        if(cur > 0 && cur <= totalDays) {
-            document.getElementById('pCount').innerText = `Dia ${cur} / 21`;
-        }
-        
+        document.getElementById('nav-controls').style.display = (cur === 0 || cur === totalPages) ? 'none' : 'flex';
+        if(cur > 0 && cur <= totalDays) document.getElementById('pCount').innerText = `Dia ${cur} / 21`;
         document.getElementById('view').scrollTop = 0;
     }
 
@@ -190,12 +163,11 @@
         location.reload();
     }
 
-    // AO CARREGAR O SITE: Checar se existe progresso salvo
     window.onload = () => {
-        const savedPage = localStorage.getItem('joyce_workbook_page');
-        if(savedPage && savedPage != 0) {
+        const saved = localStorage.getItem('joyce_page');
+        if(saved && saved != 0) {
             document.getElementById('p0').classList.remove('active');
-            cur = parseInt(savedPage);
+            cur = parseInt(saved);
             document.getElementById('p'+cur).classList.add('active');
             updateUI();
         }
