@@ -27,7 +27,6 @@
         h1 { font-size: 2.2rem; margin-bottom: 10px; text-align: center; line-height: 1.2; }
         h2 { border-left: 5px solid var(--gold); padding-left: 15px; margin: 25px 0; font-size: 1.6rem; }
         p { line-height: 1.8; font-size: 1.1rem; color: var(--text); margin-bottom: 15px; }
-        ul, ol { line-height: 1.8; font-size: 1.1rem; color: var(--text); margin-bottom: 20px; }
         
         .bible-quote { background: #f1f5f9; padding: 25px; border-radius: 10px; border-left: 5px solid var(--gold); font-style: italic; margin: 25px 0; }
         .challenge-box { background: #fffcf0; border: 2px solid #f3e8c1; padding: 25px; border-radius: 15px; margin-top: 30px; }
@@ -40,12 +39,8 @@
         .btn-gold { background: var(--gold); color: white; width: 100%; margin-top: 10px; }
         .btn-reset { background: transparent; color: #94a3b8; border: 1px solid #e2e8f0; font-size: 0.7rem; margin-top: 50px; cursor: pointer; width: 100%; padding: 10px; }
 
-        .img-container { width: 100%; text-align: center; margin-bottom: 20px; }
-        .img-capa { width: 100%; height: auto; max-height: 400px; object-fit: contain; border-radius: 15px; }
-
-        #congrats-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--navy); color: white; padding: 30px 50px; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); text-align: center; z-index: 10000; border: 3px solid var(--gold); }
-        .index-item { cursor: pointer; padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: var(--text); transition: 0.2s; }
-        .index-item:hover { color: var(--gold); padding-left: 5px; }
+        .index-item { cursor: pointer; padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: var(--text); }
+        .locked-item { color: #ccc; cursor: not-allowed; font-style: italic; }
     </style>
 </head>
 <body>
@@ -58,16 +53,10 @@
     </div>
 </div>
 
-<div id="congrats-popup">
-    <h2 style="color: var(--gold); margin: 0; border:none;">🎉 Excelente!</h2>
-    <p>Sua reflexão foi salva com sucesso.</p>
-    <button class="btn btn-next" onclick="closePopup()">Ir para o Próximo Dia</button>
-</div>
-
 <div id="workbook">
     <div class="progress-bar"><div id="fill"></div></div>
     
-    <div class="viewport" id="view">
+       <div class="viewport" id="view">
         <div class="page active" id="p-capa">
             <div class="img-container"><img src="mentora.jpg" class="img-capa"></div>
             <p style="text-align:center; font-weight:bold; color:var(--gold); letter-spacing: 2px;">E-BOOK</p>
@@ -86,10 +75,10 @@
             <div class="index-item" onclick="goTo('p-ch6')">6. Plano prático de aplicação</div>
             <div class="index-item" onclick="goTo('p-ch7')">7. Considerações finais</div>
             <div class="index-item" onclick="goTo('p-ch8')">8. Sobre a autora</div>
-            <div id="challenge-btn-index" class="index-item" onclick="resumeChallenge()" style="color:var(--gold); font-weight:bold; border-top: 2px solid #eee; margin-top: 15px; padding-top: 15px;">
-                ➔ COMEÇAR 21 DIAS DE ATIVIDADES PRÁTICAS
-            </div>
-            <button class="btn btn-reset" onclick="resetProgress()">REINICIAR TUDO (Perca do Progresso Feito em Tudo)</button>
+            
+            <div id="challenge-list" style="margin-top:20px; border-top: 2px solid #eee; padding-top:10px;"></div>
+            
+            <button class="btn btn-reset" onclick="resetProgress()">REINICIAR TUDO</button>
         </div>
 
         <div id="p-ch1" class="page">
@@ -161,165 +150,156 @@
         <div id="p-ch8" class="page">
             <h2>8. SOBRE A AUTORA</h2>
             <p><strong>Joyce Genova</strong> é Head Trainer, Master Coach, Rebirther e Heart Coherencer. Especialista em desenvolvimento emocional feminino, dedica-se a ajudar mulheres a curarem traumas e promover equilíbrio entre corpo, alma e espírito.</p>
-            <p>Sua missão é formar mulheres emocionalmente maduras, espiritualmente firmes e conscientes do seu valor.</p>
-            <button class="btn btn-next" style="width:100%; background: var(--gold);" onclick="resumeChallenge()">Ir para a Jornada 21 Dias</button>
-        </div>
 
         <div id="challenge-content"></div>
-
-        <div class="page" id="p22">
-            <div style="text-align:center">
-                <h1 style="color:var(--gold)">Jornada Concluída!</h1>
-                <div class="img-container"><img src="final.jpg" class="img-capa"></div>
-                <p>Sua mente foi renovada. Parabéns por chegar até aqui!</p>
-                <a href="https://wa.me/5519983578989" target="_blank" style="text-decoration:none">
-                    <button class="btn btn-gold">Intereçada em uma Mentoria Índividual, Falar com Joyce Genova</button>
-                </a>
-            </div>
-        </div>
     </div>
 
     <div class="controls" id="nav-controls" style="display:none;">
-        <button class="btn btn-prev" onclick="move(-1)">Voltar</button>
-        <span id="pCount" style="font-weight: bold;">1 / 21</span>
-        <button class="btn btn-next" onclick="move(1)">Próximo</button>
+        <button class="btn btn-prev" onclick="goTo('p-index')">Menu</button>
+        <span id="pCount" style="font-weight: bold;"></span>
     </div>
 </div>
 
 <script>
-    let cur = 0;
     const SENHA_MESTRA = "EbookCEF";
 
     const conteudos = [
-        { t: "Dia 1: Neuroplasticidade", c: "Seu cérebro não é fixo. Hoje, entenda que cada pensamento novo cria uma trilha física na sua mente.", d: "Escreva uma crença limitante que você tem sobre si mesma e transforme-a em uma afirmação lógica." },
-        { t: "Dia 2: O Sequestro da Amígdala", c: "Quando você se estressa, sua amígdala 'rouba' o comando do cérebro. O segredo é a pausa.", d: "Descreva um momento recente onde a emoção venceu a razão. O que você faria diferente?" },
-        { t: "Dia 3: Dopamina Barata", c: "O vício em notificações drena sua energia. Hoje focamos em proteger sua atenção.", d: "Fique 2 horas sem olhar o celular hoje e registre como sua ansiedade se comportou." },
-        { t: "Dia 4: O Nervo Vago", c: "O nervo vago é o freio do seu estresse. Aprender a respirar é aprender a se acalmar sob pressão.", d: "Pratique a respiração 4-7-8 por 5 minutos e descreva a sensação física agora." },
-        { t: "Dia 5: Ciclo de Recompensa", c: "Todo hábito tem um gatilho. Se você mudar o gatilho, muda o destino.", d: "Identifique o gatilho que te faz comer doce ou procrastinar. Qual é o sinal?" },
-        { t: "Dia 6: Mielinização", c: "A repetição isola os neurônios. Quanto mais você repete, mais fácil fica agir corretamente.", d: "Qual habilidade nova você vai repetir hoje, mesmo que sinta preguiça?" },
-        { t: "Dia 7: Fadiga de Decisão", c: "Decidir cansa. Use suas manhãs para o que é difícil e deixe o automático para a noite.", d: "Escolha sua roupa e refeições para amanhã ainda hoje. Como isso libera sua mente?" },
-        { t: "Dia 8: Cortisol vs Ocitocina", c: "O estresse libera cortisol. O abraço e a conexão liberam ocitocina, o antídoto natural.", d: "Tenha uma conversa profunda com alguém hoje. Como isso mudou seu humor?" },
-        { t: "Dia 9: Higiene do Sono", c: "Seu cérebro se limpa à noite. Sem sono, você acorda com o cérebro 'sujo' de toxinas.", d: "Desligue as telas 1 hora antes de dormir hoje. Anote se o despertar foi melhor." },
-        { t: "Dia 10: Viés de Confirmação", c: "Nós buscamos o que já acreditamos. Se você se acha incapaz, seu cérebro vai ignorar suas vitórias.", d: "Liste 3 sucessos pequenos que você teve hoje e que sua mente tentou ignorar." },
-        { t: "Dia 11: O Córtex Pré-Frontal", c: "Ele é o CEO da sua vida. Mas ele precisa de glicose e descanso para trabalhar bem.", d: "Identifique uma tarefa que você adiou. Divida-a em 3 partes minúsculas." },
-        { t: "Dia 12: Sistema de Luta ou Fuga", c: "Sua Mente não sabe a diferença entre um leão e um boleto atrasado.", d: "Quando sentir medo hoje, pergunte: 'Há um risco real de vida ou é apenas meu ego?'" },
-        { t: "Dia 13: Memória Muscular", c: "O corpo aprende antes da mente consciente em muitos casos.", d: "Tente realizar uma tarefa cotidiana com a mão não dominante. Observe seu foco aumentar." },
-        { t: "Dia 14: Neurotransmissores", c: "Serotonina e bem-estar. O que você come afeta como você sente.", d: "Coma algo nutritivo e evite processados por 24h. Note a clareza mental." },
-        { t: "Dia 15: O Poder do Não", c: "Cada 'sim' para os outros é um 'não' para os seus objetivos neurais.", d: "Diga um 'não' educado para algo que drena seu tempo hoje." },
-        { t: "Dia 16: Visualização Ativa", c: "O cérebro não diferencia o real do imaginado com clareza total.", d: "Feche os olhos e visualize seu sucesso por 2 minutos. O que você está sentindo?" },
-        { t: "Dia 17: Resiliência Neural", c: "Cair e levantar fortalece as conexões de persistência.", d: "Lembre de um fracasso e escreva qual foi o aprendizado biológico dele." },
-        { t: "Dia 18: Foco e Atenção", c: "A multitarefa é um mito. Ela apenas alterna o foco e cansa o cérebro.", d: "Trabalhe em uma única coisa por 25 minutos sem interrupções." },
-        { t: "Dia 19: Linguagem e Pensamento", c: "As palavras que você usa moldam a estrutura da sua realidade.", d: "Troque a frase 'Eu tenho que' por 'Eu escolho'. Como isso muda seu peso interno?" },
-        { t: "Dia 20: Empatia e Neurônios Espelho", c: "Nós imitamos o comportamento de quem está ao nosso redor.", d: "Observe alguém que você admira. Tente imitar a postura dela por 10 minutos." },
-        { t: "Dia 21: A Nova Arquitetura", c: "Você chegou ao fim do ciclo básico. Sua mente não é mais a mesma de 21 dias atrás.", d: "Qual é o seu próximo grande compromisso com sua evolução? Assine aqui embaixo." }
+        { t: "Neuroplasticidade", c: "Seu cérebro não é fixo. Pensamentos novos criam trilhas físicas.", d: "Escreva uma crença limitante e transforme-a em afirmação lógica." },
+        { t: "O Sequestro da Amígdala", c: "O segredo para vencer o impulso é a pausa.", d: "Descreva uma situação onde a emoção venceu a razão recentemente." },
+        { t: "Dopamina Barata", c: "O vício em notificações drena sua energia.", d: "Fique 2 horas sem celular hoje e registre como se sentiu." },
+        { t: "O Nervo Vago", c: "Respirar é aprender a se acalmar sob pressão.", d: "Pratique a respiração 4-7-8 por 5 minutos." },
+        { t: "Ciclo de Recompensa", c: "Mude o gatilho, mude o hábito.", d: "Identifique o gatilho de um comportamento que deseja mudar." },
+        { t: "Mielinização", c: "A repetição isola os neurônios e facilita a ação.", d: "Qual hábito você vai repetir hoje mesmo sem vontade?" },
+        { t: "Fadiga de Decisão", c: "Decidir cansa. Simplifique sua manhã.", d: "Escolha sua roupa de amanhã hoje à noite." },
+        { t: "Cortisol vs Ocitocina", c: "A conexão humana é o antídoto do estresse.", d: "Tenha uma conversa profunda com alguém hoje." },
+        { t: "Higiene do Sono", c: "Seu cérebro se limpa enquanto você dorme.", d: "Desligue telas 1h antes de dormir hoje." },
+        { t: "Viés de Confirmação", c: "Buscamos o que já acreditamos.", d: "Liste 3 sucessos pequenos de hoje." },
+        { t: "O Córtex Pré-Frontal", c: "Ele é o CEO da sua mente.", d: "Divida uma tarefa difícil em 3 partes minúsculas." },
+        { t: "Luta ou Fuga", c: "Seu corpo reage a boletos como se fossem leões.", d: "Ao sentir medo, pergunte: há risco real de vida?" },
+        { t: "Memória Muscular", c: "O corpo aprende pela prática.", d: "Realize uma tarefa simples com a mão não dominante." },
+        { t: "Neurotransmissores", c: "O que você come afeta como você sente.", d: "Evite processados por 24h e note sua clareza." },
+        { t: "O Poder do Não", c: "Dizer não aos outros é dizer sim para você.", d: "Diga um 'não' necessário hoje." },
+        { t: "Visualização Ativa", c: "O cérebro simula a realidade.", d: "Visualize seu sucesso por 2 minutos." },
+        { t: "Resiliência Neural", c: "Cair e levantar fortalece as conexões.", d: "Qual o aprendizado de um erro recente?" },
+        { t: "Foco e Atenção", c: "A multitarefa é um mito exaustivo.", d: "Trabalhe 25 min em uma única coisa." },
+        { t: "Linguagem", c: "Suas palavras moldam sua biologia.", d: "Troque 'Tenho que' por 'Eu escolho'." },
+        { t: "Neurônios Espelho", c: "Nós imitamos quem admiramos.", d: "Observe e imite uma postura de confiança hoje." },
+        { t: "A Nova Arquitetura", c: "Sua mente não é mais a mesma.", d: "Qual seu próximo compromisso com sua evolução?" }
     ];
 
     const container = document.getElementById('challenge-content');
     conteudos.forEach((item, index) => {
         let i = index + 1;
         let div = document.createElement('div');
-        div.id = 'p' + i;
+        div.id = 'day-' + i;
         div.className = 'page';
-        div.innerHTML = `<h2>${item.t}</h2><p>${item.c}</p><div class="challenge-box"><h3>🎯 Desafio Prático</h3><p>${item.d}</p><textarea id="t${i}" oninput="saveText(${i})" placeholder="Sua resposta..."></textarea><button class="btn btn-gold" onclick="finishDay(${i})">Concluir Dia</button></div>`;
+        div.innerHTML = `
+            <h2>Dia ${i}: ${item.t}</h2>
+            <p style="background: #eef2f7; padding: 15px; border-radius: 10px; border-left: 4px solid var(--navy);">
+                <strong>Conceito:</strong> ${item.c}
+            </p>
+            <div class="challenge-box">
+                <p><strong>Desafio:</strong> ${item.d}</p>
+                <textarea id="text-day-${i}" oninput="saveData(${i})" placeholder="Sua reflexão..."></textarea>
+                <div id="status-${i}"></div>
+                <button class="btn btn-gold" id="btn-day-${i}" onclick="completeDay(${i})">Concluir Dia ${i}</button>
+            </div>
+        `;
         container.appendChild(div);
     });
+
+    function goTo(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.getElementById('view').scrollTop = 0;
+        
+        const isChallenge = id.startsWith('day-');
+        document.getElementById('nav-controls').style.display = (isChallenge || id.startsWith('p-ch')) ? 'flex' : 'none';
+        if(isChallenge) {
+            let n = id.split('-')[1];
+            document.getElementById('pCount').innerText = `Dia ${n} / 21`;
+            checkLockState(n);
+        }
+    }
+
+    function renderIndex() {
+        const list = document.getElementById('challenge-list');
+        list.innerHTML = '<h3 style="color:var(--gold)">Jornada 21 Dias</h3>';
+        let lastDate = localStorage.getItem('joyce_date');
+        let unlockedDay = parseInt(localStorage.getItem('joyce_unlocked_day')) || 1;
+        let today = new Date().toDateString();
+
+        conteudos.forEach((item, index) => {
+            let d = index + 1;
+            let div = document.createElement('div');
+            if (d < unlockedDay) {
+                div.className = 'index-item';
+                div.innerHTML = `✅ Dia ${d}: ${item.t}`;
+                div.onclick = () => goTo('day-' + d);
+            } else if (d === unlockedDay) {
+                if (lastDate === today) {
+                    div.className = 'index-item locked-item';
+                    div.innerHTML = `⏳ Dia ${d}: (Disponível amanhã)`;
+                    div.onclick = () => alert("Um passo por dia! Volte amanhã para continuar.");
+                } else {
+                    div.className = 'index-item';
+                    div.innerHTML = `🎯 Dia ${d}: ${item.t}`;
+                    div.onclick = () => goTo('day-' + d);
+                }
+            } else {
+                div.className = 'index-item locked-item';
+                div.innerHTML = `🔒 Dia ${d}: Bloqueado`;
+            }
+            list.appendChild(div);
+        });
+    }
+
+    function completeDay(d) {
+        if(document.getElementById('text-day-' + d).value.length < 5) return alert("Escreva algo antes de concluir!");
+        localStorage.setItem('joyce_date', new Date().toDateString());
+        let current = parseInt(localStorage.getItem('joyce_unlocked_day')) || 1;
+        if(d === current) localStorage.setItem('joyce_unlocked_day', current + 1);
+        renderIndex();
+        goTo('p-index');
+    }
+
+    function checkLockState(d) {
+        let isDoneToday = localStorage.getItem('joyce_date') === new Date().toDateString();
+        let unlocked = parseInt(localStorage.getItem('joyce_unlocked_day')) || 1;
+        let btn = document.getElementById('btn-day-' + d);
+        let status = document.getElementById('status-' + d);
+        if(parseInt(d) < unlocked || (isDoneToday && parseInt(d) === unlocked)) {
+            btn.style.display = 'none';
+            status.innerHTML = "<p style='color:var(--gold); font-weight:bold;'>✨ Concluído!</p>";
+        } else {
+            btn.style.display = 'block';
+            status.innerHTML = "";
+        }
+    }
 
     function checkLogin() {
         if(document.getElementById('passInput').value === SENHA_MESTRA) {
             localStorage.setItem('joyce_auth', 'true');
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('workbook').style.visibility = 'visible';
-            updateIndexText();
-        } else { alert("Senha incorreta!"); }
+            renderIndex();
+        } else alert("Senha incorreta!");
     }
 
-    function saveText(id) {
-        localStorage.setItem('joyce_text_' + id, document.getElementById('t' + id).value);
-        updateIndexText();
-    }
-
-    function updateIndexText() {
-        const last = localStorage.getItem('joyce_last_page');
-        const btn = document.getElementById('challenge-btn-index');
-        if (last && parseInt(last) > 0) {
-            btn.innerText = "➔ CONTINUAR 21 DIAS DE ATIVIDADES PRÁTICAS";
-        } else {
-            btn.innerText = "➔ COMEÇAR 21 DIAS DE ATIVIDADES PRÁTICAS";
-        }
-    }
-
-    function goTo(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(id);
-        if(target) {
-            target.classList.add('active');
-            if(id.startsWith('p') && !isNaN(id.substring(1))) {
-                cur = parseInt(id.substring(1));
-                localStorage.setItem('joyce_last_page', cur);
-            } else { cur = 0; }
-            updateUI();
-            updateIndexText();
-        }
-    }
-
-    function resumeChallenge() {
-        const last = localStorage.getItem('joyce_last_page');
-        goTo('p' + (last || 1));
-    }
-
-    function resetProgress() {
-        if(confirm("Isso apagará todas as suas respostas e progresso. Confirmar?")) {
-            for(let i = 1; i <= 21; i++) {
-                localStorage.removeItem('joyce_text_' + i);
-                if(document.getElementById('t'+i)) document.getElementById('t'+i).value = "";
-            }
-            localStorage.removeItem('joyce_last_page');
-            cur = 0;
-            goTo('p-capa');
-            updateUI();
-            updateIndexText();
-        }
-    }
-
-    function move(step) {
-        if (cur === 1 && step === -1) {
-            goTo('p-capa');
-            return;
-        }
-        let next = cur + step;
-        if(next >= 1 && next <= 22) goTo('p' + next);
-    }
-
-    function updateUI() {
-        const isDay = cur >= 1 && cur <= 21;
-        document.getElementById('nav-controls').style.display = isDay ? 'flex' : 'none';
-        document.getElementById('fill').style.width = (cur / 21 * 100) + '%';
-        if(isDay) document.getElementById('pCount').innerText = `${cur} / 21`;
-        document.getElementById('view').scrollTop = 0;
-    }
-
-    function finishDay(id) {
-        if(document.getElementById('t'+id).value.length < 5) return alert("Por favor, escreva sua reflexão.");
-        document.getElementById('congrats-popup').style.display = 'block';
-    }
-
-    function closePopup() {
-        document.getElementById('congrats-popup').style.display = 'none';
-        move(1);
-    }
+    function saveData(d) { localStorage.setItem('joyce_txt_' + d, document.getElementById('text-day-' + d).value); }
+    function resetProgress() { if(confirm("Reiniciar tudo?")) { localStorage.clear(); location.reload(); } }
 
     window.onload = () => {
         if(localStorage.getItem('joyce_auth') === 'true') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('workbook').style.visibility = 'visible';
+            renderIndex();
         }
-        for(let i = 1; i <= 21; i++) {
-            const saved = localStorage.getItem('joyce_text_' + i);
-            if(saved && document.getElementById('t' + i)) document.getElementById('t' + i).value = saved;
+        for(let i=1; i<=21; i++) {
+            let s = localStorage.getItem('joyce_txt_' + i);
+            if(s) document.getElementById('text-day-' + i).value = s;
         }
-        updateIndexText();
     };
 </script>
 </body>
 </html>
-
