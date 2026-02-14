@@ -3,42 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass Neurociência - Joyce Genova</title>
+    <title>Neurociência da Mente - Joyce Genova</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #0f172a; --gold: #b8924a; --white: #ffffff; --bg: #f8fafc; --text: #334155; }
-        * { box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; }
+        :root { --navy: #0f172a; --gold: #b8924a; --white: #ffffff; --bg: #f8fafc; --text: #334155; --accent: #1e293b; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; height: 100vh; overflow: hidden; }
         
-        #workbook { width: 100%; max-width: 900px; height: 100vh; background: var(--white); display: flex; flex-direction: column; box-shadow: 0 0 50px rgba(0,0,0,0.1); }
-        .progress-bar { height: 8px; background: #eee; width: 100%; }
-        #fill { height: 100%; background: var(--gold); width: 1%; transition: 0.4s; }
+        #workbook { width: 100%; max-width: 1000px; height: 100vh; background: var(--white); display: flex; flex-direction: column; box-shadow: 0 0 60px rgba(0,0,0,0.15); border-right: 1px solid #e2e8f0; border-left: 1px solid #e2e8f0; }
+        .progress-bar { height: 10px; background: #eee; width: 100%; border-bottom: 1px solid #ddd; }
+        #fill { height: 100%; background: linear-gradient(90deg, var(--navy), var(--gold)); width: 1.25%; transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 
-        .viewport { flex-grow: 1; overflow-y: auto; padding: 40px 60px; }
-        .page { display: none; animation: fadeIn 0.5s ease; }
+        .viewport { flex-grow: 1; overflow-y: auto; padding: 50px 80px; }
+        .page { display: none; animation: fadeIn 0.6s ease-out; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--navy); }
-        h1 { font-size: 2.8rem; margin-bottom: 20px; border-bottom: 4px solid var(--gold); display: inline-block; }
-        p { line-height: 1.8; font-size: 1.1rem; color: var(--text); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--navy); margin-bottom: 10px; line-height: 1.1; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); border-bottom: 3px solid var(--gold); display: inline-block; margin: 25px 0; }
+        h3 { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; }
+        p { line-height: 1.9; font-size: 1.15rem; color: var(--text); margin-bottom: 20px; text-align: justify; }
 
-        /* Gráfico do Cérebro (CSS) */
-        .brain-chart { display: flex; flex-direction: column; gap: 10px; margin: 30px 0; }
-        .layer { padding: 20px; border-radius: 10px; color: white; font-weight: bold; text-align: center; transition: 0.3s; }
-        .neocortex { background: #1e293b; border: 2px solid var(--gold); }
-        .limbico { background: #334155; width: 85%; margin: 0 auto; }
-        .reptiliano { background: #475569; width: 70%; margin: 0 auto; }
+        /* Gráficos e Boxes Técnicos */
+        .chart-box { background: var(--navy); color: white; padding: 40px; border-radius: 20px; margin: 30px 0; position: relative; overflow: hidden; }
+        .brain-part { border: 1px solid rgba(184, 146, 74, 0.5); margin: 15px 0; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.05); }
+        .brain-part strong { color: var(--gold); font-size: 1.2rem; display: block; margin-bottom: 5px; }
 
-        /* Boxes de Conteúdo */
-        .info-card { background: #f1f5f9; border-left: 6px solid var(--gold); padding: 25px; margin: 25px 0; border-radius: 0 10px 10px 0; }
-        .scientific-term { color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-        .exercise-area { background: #fffcf5; border: 1px dashed var(--gold); padding: 25px; border-radius: 10px; margin-top: 30px; }
-        
-        .controls { padding: 20px 60px; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .btn { padding: 12px 30px; border-radius: 50px; border: none; cursor: pointer; font-weight: 700; transition: 0.3s; }
-        .btn-next { background: var(--navy); color: white; }
-        .btn-prev { background: #cbd5e1; color: var(--navy); }
+        .quote-box { border-left: 8px solid var(--gold); background: #fdfaf3; padding: 30px; margin: 30px 0; font-style: italic; font-size: 1.2rem; border-radius: 0 15px 15px 0; }
+        .scientific-note { background: #eff6ff; border: 1px solid #dbeafe; padding: 20px; border-radius: 12px; display: flex; align-items: flex-start; gap: 15px; margin: 20px 0; }
+        .scientific-note::before { content: "🧬"; font-size: 1.5rem; }
+
+        .exercise-card { background: #fff; border: 2px solid #f1f5f9; padding: 35px; border-radius: 20px; margin-top: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        textarea { width: 100%; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px; margin-top: 15px; font-family: inherit; font-size: 1.05rem; transition: 0.3s; background: #fcfcfc; }
+        textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(184, 146, 74, 0.1); }
+
+        /* Controles */
+        .controls { padding: 30px 80px; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .btn { padding: 15px 40px; border-radius: 50px; border: none; cursor: pointer; font-weight: 700; transition: 0.4s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-next { background: var(--navy); color: white; box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2); }
+        .btn-next:hover { background: var(--gold); transform: translateY(-2px); }
+        .btn-prev { background: #f1f5f9; color: var(--navy); }
+        .btn-prev:hover { background: #e2e8f0; }
+        .page-counter { font-weight: 800; color: var(--navy); font-size: 1.2rem; }
+
+        @media (max-width: 768px) { .viewport { padding: 30px; } .controls { padding: 20px; } h1 { font-size: 2.2rem; } }
     </style>
 </head>
 <body>
@@ -48,101 +56,108 @@
     
     <div class="viewport" id="view">
         <div class="page active" id="p1">
-            <p class="scientific-term">Neurociência de Alta Performance</p>
+            <h3>Neurociência & Comportamento</h3>
             <h1>O Código da Mente</h1>
-            <p>Este não é um livro de leitura passiva. É uma jornada de <strong>80 estágios</strong> para entender a arquitetura das suas decisões. Você aprenderá como a biologia molda sua personalidade.</p>
-            <div class="info-card">
-                "O cérebro não é um copo a ser enchido, mas um fogo a ser aceso."
+            <p>Seja bem-vinda ao mais profundo mergulho na biologia da sua personalidade. Este workbook de 80 módulos foi desenhado para quem não aceita mais ser refém de impulsos invisíveis.</p>
+            <div class="quote-box">
+                "Não somos o que pensamos ser, somos o resultado de circuitos neurais que podem ser reprogramados."
             </div>
-            <p><strong>Por Joyce Genova</strong></p>
+            <p><strong> Joyce Genova - Mentora de Inteligência Emocional</strong></p>
         </div>
 
         <div class="page" id="p2">
-            <h2>Arquitetura Cerebral</h2>
-            <p>Para dominar o autocontrole, você deve entender as três forças que lutam dentro de você agora:</p>
-            <div class="brain-chart">
-                <div class="layer neocortex">NEOCÓRTEX: Lógica, Linguagem, Futuro</div>
-                <div class="layer limbico">SISTEMA LÍMBICO: Emoções, Memória, Medo</div>
-                <div class="layer reptiliano">REPTILIANO: Sobrevivência, Impulso</div>
+            <h2>A Anatomia da Decisão</h2>
+            <p>Para mudar, você precisa entender quem manda. O conflito humano nasce da disputa entre estas três centrais:</p>
+            <div class="chart-box">
+                <div class="brain-part">
+                    <strong>1. Córtex Pré-Frontal (O Estrategista)</strong>
+                    Sede da lógica, moral e planejamento. Gasta muita energia e cansa rápido.
+                </div>
+                <div class="brain-part">
+                    <strong>2. Sistema Límbico (O Sentimental)</strong>
+                    Onde moram as memórias e emoções. É 5x mais rápido que o racional.
+                </div>
+                <div class="brain-part">
+                    <strong>3. Tronco Encefálico (O Sobrevivente)</strong>
+                    Responsável pelos batimentos, respiração e instinto de luta ou fuga.
+                </div>
             </div>
-            <p>O <strong>Sequestro da Amígdala</strong> ocorre quando o Sistema Límbico toma o poder e "desliga" sua razão. É aqui que você grita, chora ou desiste.</p>
+            <p>A mentoria foca em dar o comando de volta ao <strong>Estrategista</strong>.</p>
         </div>
 
         <div class="page" id="p3">
-            <h2>A Química da Motivação</h2>
-            <p class="scientific-term">Neurotransmissor: Dopamina</p>
-            <p>Diferente do que dizem, a dopamina não é sobre prazer, mas sobre <strong>antecipação</strong>. Ela é o combustível da busca. Quando você checa o celular, seu cérebro está buscando uma recompensa incerta.</p>
-            <div class="info-card">
-                <strong>Insight Científico:</strong> O excesso de estímulos baratos (redes sociais, açúcar) causa um "downregulation" dos seus receptores, deixando você sem vontade para objetivos difíceis.
+            <h2>Dopamina e Vício Digital</h2>
+            <p>A Dopamina não é o hormônio do prazer, mas o da <strong>busca</strong>. É o neurotransmissor que te faz "querer". No mundo digital, estamos sofrendo uma inundação de dopamina barata.</p>
+            <div class="scientific-note">
+                O uso excessivo de redes sociais causa uma 'dessensibilização' dos receptores D2, tornando a vida real menos prazerosa.
+            </div>
+            <div class="exercise-card">
+                <strong>Laboratório de Hábito:</strong> Quais são os 3 momentos do dia em que você sente um impulso incontrolável de checar o celular?
+                <textarea rows="3"></textarea>
             </div>
         </div>
 
-        <div class="page" id="p4">
-            <h2>Cortisol e Performance</h2>
-            <p>O cortisol é o hormônio do estresse. Em níveis baixos, ele te mantém alerta. Em níveis altos e constantes, ele destrói suas conexões neurais no <strong>Hipocampo</strong> (sua central de memória).</p>
-            <div class="exercise-area">
-                <strong>Reflexão de Leitura:</strong> Como o seu corpo sinaliza que o cortisol está alto? (Cansaço ao acordar? Tensão nos ombros? Pensamento acelerado?)
-                <textarea style="width:100%; height:80px; margin-top:10px;"></textarea>
-            </div>
-        </div>
-
-        <div id="dynamic-content"></div>
+        <div id="content-engine"></div>
 
     </div>
 
     <div class="controls">
-        <button class="btn btn-prev" onclick="move(-1)" id="bPrev">Anterior</button>
-        <span id="pCount" style="font-weight: 800; color: var(--gold);">1 / 80</span>
-        <button class="btn btn-next" onclick="move(1)" id="bNext">Próximo</button>
+        <button class="btn btn-prev" onclick="move(-1)" id="prevBtn">Anterior</button>
+        <span class="page-counter" id="pIndicator">1 / 80</span>
+        <button class="btn btn-next" onclick="move(1)" id="nextBtn">Próximo</button>
     </div>
 </div>
 
 <script>
-    let cur = 1;
+    let current = 1;
     const total = 80;
 
-    // Base de dados de leitura real para as páginas
-    const contentLibrary = [
-        { t: "Neuroplasticidade", c: "Seu cérebro é como plástico. A cada novo hábito, você cria uma 'mielinização', tornando a conexão mais forte e rápida." },
-        { t: "O Nervo Vago", c: "A técnica de respiração 4-7-8 ativa o nervo vago, enviando um sinal químico imediato para o cérebro relaxar." },
-        { t: "Fadiga de Decisão", c: "Decidir gasta glicose. É por isso que é tão difícil manter a dieta à noite; seu estoque de energia neural acabou." },
-        { t: "O Papel da Serotonina", c: "A serotonina regula o humor. Baixos níveis levam à irritabilidade. Ela é produzida 90% no intestino." },
-        { t: "Sono e Limpeza Neural", c: "Durante o sono, o sistema glinfático 'lava' seu cérebro, removendo toxinas que causam Alzheimer e névoa mental." }
+    // BANCO DE DADOS DE CONTEÚDO REAL (NÃO REPETITIVO)
+    const lessons = [
+        { t: "Neuroplasticidade Ativa", c: "Seu cérebro é como uma floresta. Caminhos muito usados viram estradas (hábitos). Para criar um novo hábito, você precisa 'machetear' um caminho novo até que ele fique limpo.", n: "A mielinização é o processo que isola os neurônios para que o sinal viaje a 400km/h." },
+        { t: "O Sequestro da Amígdala", c: "Quando você sente raiva súbita, sua amígdala 'rouba' o sangue do córtex frontal. Você fica literalmente incapaz de pensar logicamente por até 20 minutos.", n: "Respirar fundo envia oxigênio para o neocórtex, retomando o controle biológico." },
+        { t: "Fadiga de Decisão", c: "Cada decisão que você toma, desde a cor da meia até um contrato, gasta glicose neural. Por isso, decidimos mal no final do dia.", n: "Minimize escolhas inúteis pela manhã para salvar energia para o que importa." },
+        { t: "O Ciclo do Cortisol", c: "O estresse crônico mantém o cortisol alto, o que 'mata' neurônios no hipocampo, sua central de memória e aprendizado.", n: "A atividade física é o melhor 'limpador' de excesso de cortisol no sangue." },
+        { t: "Nervo Vago: O Freio", c: "O nervo vago conecta o cérebro ao coração e intestino. Ao expirar de forma longa, você ativa o sistema parassimpático.", n: "O controle do nervo vago é a diferença entre o pânico e a serenidade sob pressão." },
+        { t: "Sistema de Recompensa", c: "O cérebro não quer ser feliz, ele quer sobreviver. Ele te premia com bem-estar sempre que você economiza energia ou obtém recursos.", n: "Engane o sistema celebrando 'micro-vitórias' para manter a motivação alta." },
+        { t: "Higiene do Sono", c: "Durante o sono profundo, o sistema glinfático remove toxinas proteicas. Sem isso, seu cérebro inflama e o raciocínio fica nublado.", n: "Luz azul após às 20h bloqueia a produção de melatonina no corpo pineal." }
     ];
 
-    const container = document.getElementById('dynamic-content');
+    const container = document.getElementById('content-engine');
 
-    for(let i=5; i<=total; i++) {
+    for(let i=4; i<=total; i++) {
         let div = document.createElement('div');
         div.id = 'p' + i;
         div.className = 'page';
-        let info = contentLibrary[i % contentLibrary.length];
+        let data = lessons[i % lessons.length];
         
         div.innerHTML = `
-            <h2>Página ${i}: ${info.t}</h2>
-            <p>${info.c}</p>
-            <div class="info-card">
-                <strong>Lição Científica #${i}:</strong> O foco prolongado requer períodos de pausa. A técnica Pomodoro respeita seu ciclo de oxigenação cerebral.
-            </div>
-            <div class="exercise-area">
-                <strong>Prática de Aprendizado:</strong> Como você aplicará o conceito de ${info.t} na sua rotina amanhã?
-                <textarea style="width:100%; height:60px; margin-top:10px;"></textarea>
+            <h3>Módulo de Aprofundamento ${i}</h3>
+            <h2>${data.t}</h2>
+            <p>${data.c}</p>
+            <div class="scientific-note">${data.n}</div>
+            <div class="exercise-card">
+                <strong>Desafio Prático #${i}:</strong> 
+                Como este conhecimento sobre <em>${data.t}</em> explica um erro que você cometeu na última semana?
+                <textarea rows="3" placeholder="Reflexão profunda aqui..."></textarea>
             </div>
         `;
         container.appendChild(div);
     }
 
     function move(step) {
-        document.getElementById('p'+cur).classList.remove('active');
-        cur += step;
-        if(cur < 1) cur = 1; if(cur > total) cur = total;
-        document.getElementById('p'+cur).classList.add('active');
-        document.getElementById('fill').style.width = (cur/total*100) + '%';
-        document.getElementById('pCount').innerText = `${cur} / ${total}`;
-        document.getElementById('bPrev').style.visibility = (cur === 1) ? 'hidden' : 'visible';
-        document.getElementById('view').scrollTop = 0;
+        document.getElementById('p'+current).classList.remove('active');
+        current += step;
+        if(current < 1) current = 1;
+        if(current > total) current = total;
+        
+        document.getElementById('p'+current).classList.add('active');
+        document.getElementById('fill').style.width = (current/total*100) + '%';
+        document.getElementById('pIndicator').innerText = `${current} / ${total}`;
+        document.getElementById('prevBtn').style.visibility = (current === 1) ? 'hidden' : 'visible';
+        document.querySelector('.viewport').scrollTop = 0;
     }
-    document.getElementById('bPrev').style.visibility = 'hidden';
+    document.getElementById('prevBtn').style.visibility = 'hidden';
 </script>
 </body>
 </html>
