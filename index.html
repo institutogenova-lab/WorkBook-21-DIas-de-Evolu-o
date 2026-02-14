@@ -12,9 +12,9 @@
         
         #workbook { width: 100%; max-width: 850px; height: 100vh; background: var(--white); display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,0.1); }
         .progress-bar { height: 10px; background: #eee; width: 100%; }
-        #fill { height: 100%; background: var(--gold); width: 4.76%; transition: 0.6s ease; }
+        #fill { height: 100%; background: var(--gold); width: 0%; transition: 0.6s ease; }
 
-        .viewport { flex-grow: 1; overflow-y: auto; padding: 40px 50px; }
+        .viewport { flex-grow: 1; overflow-y: auto; padding: 40px 50px; scroll-behavior: smooth; }
         .page { display: none; animation: fadeIn 0.5s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -27,15 +27,12 @@
         .challenge-box { background: #fffcf0; border: 2px solid #f3e8c1; padding: 25px; border-radius: 15px; margin-top: 30px; }
         textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 10px; margin: 15px 0; font-family: inherit; font-size: 1rem; resize: none; }
         
-        /* Botões */
         .controls { padding: 20px 50px; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .btn { padding: 12px 25px; border-radius: 50px; border: none; cursor: pointer; font-weight: 700; transition: 0.3s; text-transform: uppercase; }
         .btn-next { background: var(--navy); color: white; }
         .btn-prev { background: #cbd5e1; color: var(--navy); }
         .btn-finish { background: var(--gold); color: white; width: 100%; margin-top: 10px; }
-        .btn-finish:hover { transform: scale(1.02); background: #a6813d; }
 
-        /* Mensagem de Parabéns */
         #congrats-popup { 
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: var(--navy); color: white; padding: 30px 50px; border-radius: 20px;
@@ -43,33 +40,64 @@
             border: 3px solid var(--gold); animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes pop { from { opacity: 0; transform: translate(-50%, -60%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+        
+        .welcome-screen, .final-screen { text-align: center; padding: 20px; }
+        .img-capa { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
 <div id="congrats-popup">
     <h2 style="color: var(--gold); margin: 0;">🎉 Congratulations!</h2>
-    <p style="color: white;">Você terminou um desafio!</p>
-    <button class="btn btn-next" onclick="closePopup()">Continuar</button>
+    <p style="color: white;">Você terminou este desafio!</p>
+    <button class="btn btn-next" onclick="closePopup()">Continuar Jornada</button>
 </div>
 
 <div id="workbook">
     <div class="progress-bar"><div id="fill"></div></div>
     
     <div class="viewport" id="view">
+        
+        <div class="page active" id="p0">
+            <div class="welcome-screen">
+                <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=800" class="img-capa">
+                <h1>Bem-vinda à sua Metamorfose</h1>
+                <p>Você está prestes a iniciar uma jornada de 21 dias que irá reprogramar a forma como você sente, decide e age.</p>
+                <div style="background:#f1f5f9; padding:20px; border-radius:10px; margin:20px 0;">
+                    <p><strong>Dica:</strong> O seu progresso é salvo automaticamente. Você pode sair e voltar de onde parou a qualquer momento.</p>
+                </div>
+                <button class="btn btn-next" style="width:100%" onclick="move(1)">Começar Jornada Agora</button>
+            </div>
+        </div>
+
         <div id="content"></div>
+
+        <div class="page" id="p22">
+            <div class="final-screen">
+                <h1 style="color:var(--gold)">Jornada Concluída!</h1>
+                <p>Parabéns por completar os 21 dias. Você provou para o seu cérebro que você detém o comando.</p>
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800" class="img-capa" style="height:200px">
+                <p>Este é apenas o começo da sua nova arquitetura mental. O próximo passo é o aprofundamento individual.</p>
+                <a href="https://wa.me/5599999999999" target="_blank" style="text-decoration:none">
+                    <button class="btn btn-next" style="width:100%; background:var(--gold)">Agendar Minha Mentoria Individual</button>
+                </a>
+                <button class="btn btn-prev" style="margin-top:20px; width:100%" onclick="restart()">Reiniciar Jornada (Limpar Progresso)</button>
+            </div>
+        </div>
+
     </div>
 
-    <div class="controls">
+    <div class="controls" id="nav-controls">
         <button class="btn btn-prev" onclick="move(-1)" id="bPrev">Anterior</button>
-        <span id="pCount" style="font-weight: bold;">1 / 21</span>
+        <span id="pCount" style="font-weight: bold; color:var(--navy)">1 / 21</span>
         <button class="btn btn-next" onclick="move(1)" id="bNext">Próximo</button>
     </div>
 </div>
 
 <script>
-    let cur = 1;
-    const total = 21;
+    let cur = 0;
+    const totalDays = 21;
+    const totalPages = 22; // De 0 a 22
 
     const conteudos = [
         { t: "Dia 1: Neuroplasticidade", c: "Seu cérebro não é fixo. Hoje, entenda que cada pensamento novo cria uma trilha física na sua mente.", d: "Escreva uma crença limitante que você tem sobre si mesma e transforme-a em uma afirmação lógica." },
@@ -95,19 +123,20 @@
         { t: "Dia 21: A Nova Arquitetura", c: "Você chegou ao fim do ciclo básico. Sua mente não é mais a mesma de 21 dias atrás.", d: "Qual é o seu próximo grande compromisso com sua evolução? Assine aqui embaixo." }
     ];
 
+    // Gerar páginas dinamicamente
     const container = document.getElementById('content');
     conteudos.forEach((item, index) => {
         let i = index + 1;
         let div = document.createElement('div');
         div.id = 'p' + i;
-        div.className = 'page' + (i === 1 ? ' active' : '');
+        div.className = 'page';
         div.innerHTML = `
-            <h1>${item.t}</h1>
+            <h2>${item.t}</h2>
             <p>${item.c}</p>
             <div class="challenge-box">
                 <h3 style="margin-top:0; color:var(--gold);">🎯 Desafio Prático</h3>
                 <p>${item.d}</p>
-                <textarea rows="3" id="text${i}" placeholder="Digite sua resposta aqui..."></textarea>
+                <textarea rows="3" id="text${i}" placeholder="Registre sua resposta aqui..."></textarea>
                 <button class="btn btn-finish" onclick="finishChallenge(${i})">Finalizar Desafio</button>
             </div>
         `;
@@ -117,7 +146,7 @@
     function finishChallenge(id) {
         const text = document.getElementById('text'+id).value;
         if(text.length < 5) {
-            alert("Por favor, escreva um pouco mais sobre o seu desafio!");
+            alert("Por favor, registre sua reflexão antes de finalizar!");
             return;
         }
         document.getElementById('congrats-popup').style.display = 'block';
@@ -125,20 +154,52 @@
 
     function closePopup() {
         document.getElementById('congrats-popup').style.display = 'none';
-        if(cur < total) move(1);
+        move(1);
     }
 
     function move(step) {
         document.getElementById('p'+cur).classList.remove('active');
         cur += step;
-        if(cur < 1) cur = 1; if(cur > total) cur = total;
+        if(cur < 0) cur = 0; if(cur > totalPages) cur = totalPages;
+        
         document.getElementById('p'+cur).classList.add('active');
-        document.getElementById('fill').style.width = (cur/total*100) + '%';
-        document.getElementById('pCount').innerText = `${cur} / ${total}`;
-        document.getElementById('bPrev').style.visibility = (cur === 1) ? 'hidden' : 'visible';
+        
+        // Salvar progresso no navegador
+        localStorage.setItem('joyce_workbook_page', cur);
+
+        updateUI();
+    }
+
+    function updateUI() {
+        const fill = (cur / totalDays) * 100;
+        document.getElementById('fill').style.width = (cur > totalDays ? 100 : fill) + '%';
+        
+        // Controle de visibilidade da barra de navegação
+        const nav = document.getElementById('nav-controls');
+        nav.style.display = (cur === 0 || cur === totalPages) ? 'none' : 'flex';
+        
+        if(cur > 0 && cur <= totalDays) {
+            document.getElementById('pCount').innerText = `Dia ${cur} / 21`;
+        }
+        
         document.getElementById('view').scrollTop = 0;
     }
-    document.getElementById('bPrev').style.visibility = 'hidden';
+
+    function restart() {
+        localStorage.clear();
+        location.reload();
+    }
+
+    // AO CARREGAR O SITE: Checar se existe progresso salvo
+    window.onload = () => {
+        const savedPage = localStorage.getItem('joyce_workbook_page');
+        if(savedPage && savedPage != 0) {
+            document.getElementById('p0').classList.remove('active');
+            cur = parseInt(savedPage);
+            document.getElementById('p'+cur).classList.add('active');
+            updateUI();
+        }
+    };
 </script>
 </body>
 </html>
