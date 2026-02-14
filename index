@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workbook - Joyce Genova</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a2a44; /* Azul Marinho Sério */
+            --accent: #c5a059;  /* Dourado Premium */
+            --text: #333;
+            --bg: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* --- CAPA --- */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            border-bottom: 8px solid var(--accent);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* --- SEÇÕES --- */
+        section {
+            padding: 60px 50px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+        }
+
+        .bio-img {
+            float: left;
+            width: 150px;
+            height: 150px;
+            background: #ddd; /* Espaço para sua foto */
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid var(--accent);
+        }
+
+        /* --- GRÁFICOS LÚDICOS --- */
+        .brain-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .brain-layer {
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .layer-1 { background: #e74c3c; width: 100%; } /* Reptiliano */
+        .layer-2 { background: #f39c12; width: 90%; margin: 0 auto; } /* Límbico */
+        .layer-3 { background: #3498db; width: 80%; margin: 0 auto; } /* Neocórtex */
+
+        /* --- CAIXAS DE EXERCÍCIO --- */
+        .exercise-box {
+            background: #fdf9f2;
+            border: 2px dashed var(--accent);
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            color: var(--primary);
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+            font-family: inherit;
+        }
+
+        .neuro-tip {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin: 20px 0;
+        }
+
+        /* --- BOTÃO FINAL --- */
+        .cta-button {
+            display: block;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 50px;
+            margin: 40px 0;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #b08d4a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .cta-button { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>O CÓDIGO DA MENTE</h1>
+        <p>Emoções, Decisões e Autocontrole</p>
+        <div style="margin-top: 30px; font-weight: bold;">JOYCE GENOVA</div>
+    </header>
+
+    <section>
+        <h2>Sua Mentora</h2>
+        <p><strong>Joyce Genova</strong> é Head Trainer, Master Coach e Rebirther. Especialista em Inteligência Emocional, dedica sua vida ao desenvolvimento de mulheres, auxiliando na cura de feridas emocionais como rejeição e abandono.</p>
+        <p><em>"Minha missão é traduzir a ciência em ferramentas de liberdade."</em></p>
+    </section>
+
+    <section>
+        <h2>Introdução</h2>
+        <p>Você já se sentiu refém de suas próprias reações? Este workbook é o seu manual de instruções cerebral. Vamos entender como sair do modo automático e assumir o comando da sua vida através da neurociência aplicada.</p>
+    </section>
+
+    <section>
+        <h2>1. A Anatomia da Decisão</h2>
+        <p>O seu cérebro não é uma peça única, mas sim camadas evolutivas que disputam o controle:</p>
+        
+        <div class="brain-chart">
+            <div class="brain-layer layer-3">NEOCÓRTEX (Razão e Planejamento)</div>
+            <div class="brain-layer layer-2">SISTEMA LÍMBICO (Emoções e Memória)</div>
+            <div class="brain-layer layer-1">REPTILIANO (Instinto e Sobrevivência)</div>
+        </div>
+
+        <div class="neuro-tip">
+            <strong>🧠 NEURO-DICA:</strong> O sistema emocional é 5x mais rápido que o racional. O segredo do autocontrole é criar uma pausa entre o estímulo e a reação.
+        </div>
+
+        <div class="exercise-box">
+            <h3>📝 Exercício: Mapeamento de Gatilhos</h3>
+            <label>O que geralmente me tira do sério?</label>
+            <textarea rows="2" placeholder="Ex: Críticas, desorganização..."></textarea>
+            
+            <label>Qual minha reação física imediata?</label>
+            <input type="text" placeholder="Ex: Coração acelera, nó na garganta...">
+        </div>
+    </section>
+
+    <section>
+        <h2>2. A Engenharia dos Hábitos</h2>
+        <p>Hábitos são atalhos neurais para economizar energia. O ciclo sempre segue: <strong>Gatilho → Rotina → Recompensa</strong>.</p>
+        
+        <div class="exercise-box">
+            <h3>📝 Reprogramação de Hábito</h3>
+            <label>Qual hábito ruim quero mudar?</label>
+            <input type="text" placeholder="Ex: Procrastinar no celular">
+            
+            <label>Qual será minha nova "Micro-ação" substituta?</label>
+            <input type="text" placeholder="Ex: Ler 1 página de um livro">
+        </div>
+    </section>
+
+    <section>
+        <h2>Plano Prático de 21 Dias</h2>
+        <ul>
+            <li><strong>Semana 1:</strong> Apenas observar e anotar gatilhos.</li>
+            <li><strong>Semana 2:</strong> Praticar a pausa de 60 segundos antes de falar/reagir.</li>
+            <li><strong>Semana 3:</strong> Implementar a nova rotina de hábito.</li>
+        </ul>
+        
+        <div class="exercise-box" style="text-align: center;">
+            <p><strong>TERMO DE COMPROMISSO</strong></p>
+            <p>Eu, <input type="text" style="width: 250px; display: inline-block;">, me comprometo com minha evolução e com o domínio da minha mente a partir de hoje.</p>
+        </div>
+    </section>
+
+    <section style="text-align: center;">
+        <h2>A Jornada Continua</h2>
+        <p>Este mapa te deu a direção. Eu posso te dar a velocidade.</p>
+        <a href="https://wa.me/SEUNUMERO" class="cta-button">QUERO MINHA SESSÃO DE DIAGNÓSTICO</a>
+    </section>
+
+    <footer>
+        &copy; 2026 Joyce Genova | Todos os direitos reservados.
+    </footer>
+</div>
+
+</body>
+</html>
