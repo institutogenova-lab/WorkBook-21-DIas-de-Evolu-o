@@ -20,7 +20,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         h1, h2 { font-family: 'Playfair Display', serif; color: var(--navy); }
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; }
         h2 { border-left: 5px solid var(--gold); padding-left: 15px; margin: 25px 0; }
         p { line-height: 1.7; font-size: 1.1rem; color: var(--text); }
 
@@ -33,6 +33,19 @@
         .btn-prev { background: #cbd5e1; color: var(--navy); }
         .btn-finish { background: var(--gold); color: white; width: 100%; margin-top: 10px; }
 
+        .img-capa { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; }
+        .img-full { width: 100%; border-radius: 15px; margin-bottom: 20px; }
+
+        /* Estilo para citações bíblicas */
+        .bible-quote { 
+            background: #f1f5f9; 
+            padding: 20px; 
+            border-radius: 10px; 
+            border-left: 5px solid var(--gold); 
+            font-style: italic;
+            margin: 20px 0;
+        }
+
         #congrats-popup { 
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: var(--navy); color: white; padding: 30px 50px; border-radius: 20px;
@@ -40,9 +53,6 @@
             border: 3px solid var(--gold); animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes pop { from { opacity: 0; transform: translate(-50%, -60%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
-        
-        .welcome-screen, .final-screen { text-align: center; padding: 20px; }
-        .img-capa { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -58,10 +68,32 @@
     
     <div class="viewport" id="view">
         
-        <div class="page active" id="p0">
-            <div class="welcome-screen">
-                <img src="comeco atividade.png?auto=format&fit=crop&w=800" class="img-capa">
-                <h1>Bem-vinda à sua Reprogamação</h1>
+        <div class="page active" id="p-capa">
+            <div style="text-align: center;">
+                <img src="http://googleusercontent.com/image_generation_content/1" class="img-full">
+                <h3 style="color: var(--gold); letter-spacing: 3px;">E-BOOK & WORKBOOK</h3>
+                <h1>CÉREBRO, EMOÇÕES E FÉ</h1>
+                <p>Como desenvolver inteligência emocional com base científica e princípios bíblicos.</p>
+                <p><strong>Joyce Genova</strong></p>
+                <button class="btn btn-next" style="width:100%; margin-top:20px" onclick="movePage('p-capa', 'p-intro')">Abrir Material</button>
+            </div>
+        </div>
+
+        <div class="page" id="p-intro">
+            <h2>1. Introdução</h2>
+            <p>Durante muitos anos acreditou-se que ser emocional era sinal de fraqueza. Hoje a neurociência mostra o contrário. Emoção não é o oposto da razão. Emoção é parte da inteligência.</p>
+            <p>Estudos sobre inteligência emocional mostram que pessoas emocionalmente inteligentes tomam decisões melhores e constroem relacionamentos mais saudáveis.</p>
+            <div class="bible-quote">
+                “Sobre tudo o que se deve guardar, guarda o teu coração, porque dele procedem as fontes da vida.” <br><strong>— Provérbios 4:23</strong>
+            </div>
+            <p>Este material une ciência, prática profissional e fundamentos bíblicos para te ajudar a desenvolver autocontrole e maturidade emocional.</p>
+            <button class="btn btn-next" style="width:100%; margin-top:20px" onclick="movePage('p-intro', 'p0')">Ir para Atividades</button>
+        </div>
+
+        <div class="page" id="p0">
+            <div style="text-align: center;">
+                <img src="comeco atividade.png" class="img-capa">
+                <h1>Bem-vinda à sua Reprogramação</h1>
                 <p>Reprograme seu cérebro em 21 dias. Seu progresso será salvo automaticamente.</p>
                 <button class="btn btn-next" style="width:100%" onclick="move(1)">Começar Jornada Agora</button>
             </div>
@@ -70,10 +102,10 @@
         <div id="content"></div>
 
         <div class="page" id="p22">
-            <div class="final-screen">
+            <div style="text-align: center;">
                 <h1 style="color:var(--gold)">Jornada Concluída!</h1>
                 <p>Parabéns por completar os 21 dias. O comando agora é seu.</p>
-                <img src="final.jpgf?auto=format&fit=crop&w=800" class="img-capa" style="height:200px">
+                <img src="final.jpgf" class="img-capa" style="height:200px">
                 
                 <a href="https://wa.me/5519983578989" target="_blank" style="text-decoration:none">
                     <button class="btn btn-next" style="width:100%; background:var(--gold)">Agendar Minha Mentoria Individual</button>
@@ -93,7 +125,7 @@
 </div>
 
 <script>
-    let cur = 0;
+    let cur = -1; // -1: Capa, -0.5: Intro, 0: Começo Ativ, 1-21: Dias
     const totalDays = 21;
     const totalPages = 22;
 
@@ -131,6 +163,16 @@
         container.appendChild(div);
     });
 
+    // Função específica para as telas iniciais (Capa e Intro)
+    function movePage(hideId, showId) {
+        document.getElementById(hideId).classList.remove('active');
+        document.getElementById(showId).classList.add('active');
+        if(showId === 'p-intro') cur = -0.5;
+        if(showId === 'p0') cur = 0;
+        localStorage.setItem('joyce_page', cur);
+        updateUI();
+    }
+
     function finishChallenge(id) {
         if(document.getElementById('text'+id).value.length < 5) return alert("Escreva um pouco mais!");
         document.getElementById('congrats-popup').style.display = 'block';
@@ -142,18 +184,26 @@
     }
 
     function move(step) {
-        document.getElementById('p'+cur).classList.remove('active');
+        // Lógica para lidar com a transição da p0 (Começo) para a p1 (Dia 1)
+        let oldPage = (cur === -0.5) ? 'p-intro' : 'p' + cur;
+        document.getElementById(oldPage).classList.remove('active');
+        
         cur += step;
-        if(cur < 0) cur = 0; if(cur > totalPages) cur = totalPages;
+        if(cur < 1 && step === -1) cur = 0; // Impedir de voltar para a capa via botões de navegação comuns
+        if(cur > totalPages) cur = totalPages;
+        
         document.getElementById('p'+cur).classList.add('active');
         localStorage.setItem('joyce_page', cur);
         updateUI();
     }
 
     function updateUI() {
-        const fill = (cur / totalDays) * 100;
+        const fill = (cur > 0) ? (cur / totalDays) * 100 : 0;
         document.getElementById('fill').style.width = (cur > totalDays ? 100 : fill) + '%';
-        document.getElementById('nav-controls').style.display = (cur === 0 || cur === totalPages) ? 'none' : 'flex';
+        
+        // Mostrar botões apenas durante os 21 dias
+        document.getElementById('nav-controls').style.display = (cur > 0 && cur < totalPages) ? 'flex' : 'none';
+        
         if(cur > 0 && cur <= totalDays) document.getElementById('pCount').innerText = `Dia ${cur} / 21`;
         document.getElementById('view').scrollTop = 0;
     }
@@ -165,10 +215,11 @@
 
     window.onload = () => {
         const saved = localStorage.getItem('joyce_page');
-        if(saved && saved != 0) {
-            document.getElementById('p0').classList.remove('active');
-            cur = parseInt(saved);
-            document.getElementById('p'+cur).classList.add('active');
+        if(saved && saved != -1) {
+            document.getElementById('p-capa').classList.remove('active');
+            cur = parseFloat(saved);
+            let targetId = (cur === -0.5) ? 'p-intro' : (cur === 0 ? 'p0' : 'p' + cur);
+            document.getElementById(targetId).classList.add('active');
             updateUI();
         }
     };
