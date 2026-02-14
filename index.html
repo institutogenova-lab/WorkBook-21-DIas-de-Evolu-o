@@ -27,7 +27,7 @@
         h1 { font-size: 2.2rem; margin-bottom: 10px; text-align: center; line-height: 1.2; }
         h2 { border-left: 5px solid var(--gold); padding-left: 15px; margin: 25px 0; font-size: 1.6rem; }
         p { line-height: 1.8; font-size: 1.1rem; color: var(--text); margin-bottom: 15px; }
-        li { line-height: 1.8; font-size: 1.1rem; color: var(--text); margin-bottom: 10px; }
+        ul, ol { line-height: 1.8; font-size: 1.1rem; color: var(--text); margin-bottom: 20px; }
         
         .bible-quote { background: #f1f5f9; padding: 25px; border-radius: 10px; border-left: 5px solid var(--gold); font-style: italic; margin: 25px 0; }
         .challenge-box { background: #fffcf0; border: 2px solid #f3e8c1; padding: 25px; border-radius: 15px; margin-top: 30px; }
@@ -78,31 +78,31 @@
 
         <div id="p-index" class="page">
             <h2>ÍNDICE</h2>
-            <div class="index-item" onclick="goTo('p1-intro')">1. Introdução</div>
-            <div class="index-item" onclick="goTo('p2-cerebro')">2. Emoções e o cérebro: razão e instinto</div>
-            <div class="index-item" onclick="goTo('p3-habitos')">3. Hábitos e recompensas</div>
-            <div class="index-item" onclick="goTo('p4-decisao')">4. Tomada de decisão</div>
-            <div class="index-item" onclick="goTo('p5-estresse')">5. Cérebro, estresse e autocontrole</div>
-            <div class="index-item" onclick="goTo('p6-plano')">6. Plano prático de aplicação</div>
-            <div class="index-item" onclick="goTo('p7-final')">7. Considerações finais</div>
-            <div class="index-item" onclick="goTo('p8-autor')">8. Sobre a autora</div>
+            <div class="index-item" onclick="goTo('p-ch1')">1. Introdução</div>
+            <div class="index-item" onclick="goTo('p-ch2')">2. Emoções e o cérebro: razão e instinto</div>
+            <div class="index-item" onclick="goTo('p-ch3')">3. Hábitos e recompensas</div>
+            <div class="index-item" onclick="goTo('p-ch4')">4. Tomada de decisão</div>
+            <div class="index-item" onclick="goTo('p-ch5')">5. Cérebro, estresse e autocontrole</div>
+            <div class="index-item" onclick="goTo('p-ch6')">6. Plano prático de aplicação</div>
+            <div class="index-item" onclick="goTo('p-ch7')">7. Considerações finais</div>
+            <div class="index-item" onclick="goTo('p-ch8')">8. Sobre a autora</div>
             <div id="challenge-btn-index" class="index-item" onclick="resumeChallenge()" style="color:var(--gold); font-weight:bold; border-top: 2px solid #eee; margin-top: 15px; padding-top: 15px;">
                 ➔ COMEÇAR 21 DIAS DE ATIVIDADES PRÁTICAS
             </div>
             <button class="btn btn-reset" onclick="resetProgress()">REINICIAR TUDO (Voltar à Capa)</button>
         </div>
 
-        <div id="p1-intro" class="page">
+        <div id="p-ch1" class="page">
             <h2>1. INTRODUÇÃO</h2>
             <p>Durante muitos anos acreditou-se que ser emocional era sinal de fraqueza. Hoje a neurociência mostra o contrário. Emoção não é o oposto da razão. Emoção é parte da inteligência.</p>
             <p>Estudos sobre inteligência emocional, especialmente os desenvolvidos por Daniel Goleman, mostram que pessoas emocionalmente inteligentes tomam decisões melhores, constroem relacionamentos mais saudáveis e têm maior equilíbrio diante da pressão.</p>
             <p>Mas a ciência não anda sozinha. A Bíblia já apontava princípios emocionais muito antes da neurociência explicar o funcionamento do cérebro.</p>
             <div class="bible-quote">“Sobre tudo o que se deve guardar, guarda o teu coração, porque dele procedem as fontes da vida.” — Provérbios 4:23</div>
             <p>Este e-book une ciência, prática profissional e fundamentos bíblicos para te ajudar a compreender como suas emoções funcionam e como desenvolver autocontrole e maturidade emocional.</p>
-            <button class="btn btn-next" style="width:100%" onclick="goTo('p2-cerebro')">Próximo Capítulo</button>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch2')">Próximo Capítulo</button>
         </div>
 
-        <div id="p2-cerebro" class="page">
+        <div id="p-ch2" class="page">
             <h2>2. EMOÇÕES E O CÉREBRO: ENTRE A RAZÃO E O INSTINTO</h2>
             <p>Nosso cérebro possui sistemas que trabalham quase como dois modos internos:</p>
             <ul>
@@ -112,35 +112,35 @@
             <p>A amígdala cerebral é responsável pelas respostas emocionais imediatas, especialmente medo e defesa. Já o córtex pré-frontal é responsável por análise, planejamento e autocontrole.</p>
             <p>Quando reagimos impulsivamente, geralmente a amígdala assumiu o controle antes que o córtex pré-frontal pudesse avaliar a situação. Daniel Goleman chama isso de “sequestro emocional”.</p>
             <div class="bible-quote">“Todo homem seja pronto para ouvir, tardio para falar, tardio para se irar.” — Tiago 1:19</div>
-            <button class="btn btn-next" style="width:100%" onclick="goTo('p3-habitos')">Próximo Capítulo</button>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch3')">Próximo Capítulo</button>
         </div>
 
-        <div id="p3-habitos" class="page">
+        <div id="p-ch3" class="page">
             <h2>3. HÁBITOS E RECOMPENSAS: POR QUE REPETIMOS O QUE FAZEMOS</h2>
-            <p>O cérebro funciona por economia de energia. Ele transforma comportamentos repetidos em hábitos para poupar esforço mental.</p>
-            <p>Todo hábito tem três etapas: 1. Gatilho, 2. Rotina, 3. Recompensa. Quando algo gera sensação de alívio ou prazer, o cérebro libera dopamina.</p>
+            <p>O cérebro funciona por economia de energia. Ele transforma comportamentos repetidos em hábitos para poupar esforço mental. Todo hábito tem três etapas: Gatilho, Rotina e Recompensa.</p>
+            <p>Quando algo gera sensação de alívio ou prazer, o cérebro libera dopamina. Ele aprende que aquilo é “bom” e tenta repetir. Não é fraqueza moral. É circuito neural consolidado.</p>
             <div class="bible-quote">“Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente.” — Romanos 12:2</div>
-            <p>Renovar a mente também envolve criar novos caminhos neurais.</p>
-            <button class="btn btn-next" style="width:100%" onclick="goTo('p4-decisao')">Próximo Capítulo</button>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch4')">Próximo Capítulo</button>
         </div>
 
-        <div id="p4-decisao" class="page">
+        <div id="p-ch4" class="page">
             <h2>4. TOMADA DE DECISÃO: EMOÇÃO OU LÓGICA</h2>
-            <p>A ciência comprova: Pessoas que não sentem emoções têm grande dificuldade de tomar decisões. Emoção é parte essencial da escolha.</p>
-            <p>Inteligência emocional envolve: Autoconsciência, Autogestão, Empatia, Habilidade social e Motivação. Decisão equilibrada não é emoção contra lógica. É integração.</p>
+            <p>A ciência comprova: Pessoas que não sentem emoções por lesões cerebrais têm grande dificuldade de tomar decisões. Emoção é parte essencial da escolha.</p>
+            <p>Decisão equilibrada não é emoção contra lógica. É integração.</p>
             <div class="bible-quote">“Confia ao Senhor as tuas obras, e teus planos serão estabelecidos.” — Provérbios 16:3</div>
-            <button class="btn btn-next" style="width:100%" onclick="goTo('p5-estresse')">Próximo Capítulo</button>
+            <p>Tomar decisão saudável envolve: Reconhecer o que você está sentindo, avaliar os fatos, considerar consequências e alinhar com seus valores.</p>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch5')">Próximo Capítulo</button>
         </div>
 
-        <div id="p5-estresse" class="page">
+        <div id="p-ch5" class="page">
             <h2>5. CÉREBRO, ESTRESSE E AUTOCONTROLE</h2>
-            <p>Sob estresse, o cérebro libera cortisol. Se o estresse se torna crônico, ele reduz a capacidade de autocontrole.</p>
-            <p>Práticas como respiração consciente, oração, meditação bíblica e escrita emocional ajudam a regular o sistema nervoso.</p>
+            <p>Sob estresse, o cérebro libera cortisol. Se o estresse se torna crônico, reduz a capacidade de autocontrole. O autocontrole não é apenas espiritual, ele também é fisiológico.</p>
             <div class="bible-quote">“Porque Deus não nos deu espírito de medo, mas de poder, amor e equilíbrio.” — 2 Timóteo 1:7</div>
-            <button class="btn btn-next" style="width:100%" onclick="goTo('p6-plano')">Próximo Capítulo</button>
+            <p>Práticas como respiração consciente, oração e escrita emocional ajudam a regular o sistema nervoso.</p>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch6')">Próximo Capítulo</button>
         </div>
 
-        <div id="p6-plano" class="page">
+        <div id="p-ch6" class="page">
             <h2>6. PLANO PRÁTICO DE APLICAÇÃO</h2>
             <ol>
                 <li>Observe suas emoções</li>
@@ -149,20 +149,18 @@
                 <li>Escreva antes de reagir</li>
                 <li>Regule o corpo antes de tomar decisões</li>
             </ol>
-            <button class="btn btn-next" style="width:100%" onclick="goTo('p7-final')">Próximo Capítulo</button>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch7')">Próximo Capítulo</button>
         </div>
 
-        <div id="p7-final" class="page">
+        <div id="p-ch7" class="page">
             <h2>7. CONSIDERAÇÕES FINAIS</h2>
-            <p>Emoções não são inimigas. São sinais. Quando ignoradas, nos dominam. Quando compreendidas, nos fortalecem.</p>
-            <p>Amadurecer é aprender a responder, não apenas reagir.</p>
-            <button class="btn btn-gold" onclick="goTo('p8-autor')">Sobre a Autora</button>
+            <p>Emoções não são inimigas. São sinais. Quando ignoradas, nos dominam. Quando compreendidas, nos fortalecem. Amadurecer é aprender a responder, não apenas reagir.</p>
+            <button class="btn btn-gold" onclick="goTo('p-ch8')">Sobre a Autora</button>
         </div>
 
-        <div id="p8-autor" class="page">
+        <div id="p-ch8" class="page">
             <h2>8. SOBRE A AUTORA</h2>
-            <p><strong>Joyce Genova</strong> é Head Trainer, Master Coach, Rebirther e Heart Coherencer. Especialista em desenvolvimento emocional feminino.</p>
-            <p>Sua missão é formar mulheres emocionalmente maduras, espiritualmente firmes e conscientes do seu valor.</p>
+            <p><strong>Joyce Genova</strong> é Head Trainer, Master Coach, Rebirther e Heart Coherencer. Especialista em desenvolvimento emocional feminino, dedica-se a ajudar mulheres a curarem traumas e promover equilíbrio entre corpo, alma e espírito.</p>
             <button class="btn btn-next" style="width:100%; background: var(--gold);" onclick="resumeChallenge()">Ir para a Jornada 21 Dias</button>
         </div>
 
@@ -172,9 +170,9 @@
             <div style="text-align:center">
                 <h1 style="color:var(--gold)">Jornada Concluída!</h1>
                 <div class="img-container"><img src="final.jpg" class="img-capa"></div>
-                <p>Parabéns por sua dedicação! Sua mente foi renovada.</p>
+                <p>Sua mente foi renovada. Parabéns por chegar até aqui!</p>
                 <a href="https://wa.me/5519983578989" target="_blank" style="text-decoration:none">
-                    <button class="btn btn-gold">Intereçada em uma mentoria índividual, Falar com Joyce Genova</button>
+                    <button class="btn btn-gold">Falar com Joyce Genova</button>
                 </a>
             </div>
         </div>
@@ -189,13 +187,13 @@
 
 <script>
     let cur = 0;
-    const SENHA_MESTRA = "EbookCEF";
+    const SENHA_MESTRA = "Workbook2026";
 
     const conteudos = [
         { t: "Dia 1: Neuroplasticidade", c: "Seu cérebro não é fixo. Hoje, entenda que cada pensamento novo cria uma trilha física na sua mente.", d: "Escreva uma crença limitante que você tem sobre si mesma e transforme-a em uma afirmação lógica." },
         { t: "Dia 2: O Sequestro da Amígdala", c: "Quando você se estressa, sua amígdala 'rouba' o comando do cérebro. O segredo é a pausa.", d: "Descreva um momento recente onde a emoção venceu a razão. O que você faria diferente?" },
         { t: "Dia 3: Dopamina Barata", c: "O vício em notificações drena sua energia. Hoje focamos em proteger sua atenção.", d: "Fique 2 horas sem olhar o celular hoje e registre como sua ansiedade se comportou." },
-        { t: "Dia 4: O Nervo Vago", c: "O nervo vago é o freio do seu estresse. Aprender a orar e meditar é aprender a se acalmar sob pressão.", d: "Pratique a oração e depois a meditação por 5 minutos e descreva a sensação física agora." },
+        { t: "Dia 4: O Nervo Vago", c: "O nervo vago é o freio do seu estresse. Aprender a respirar é aprender a se acalmar sob pressão.", d: "Pratique a respiração 4-7-8 por 5 minutos e descreva a sensação física agora." },
         { t: "Dia 5: Ciclo de Recompensa", c: "Todo hábito tem um gatilho. Se você mudar o gatilho, muda o destino.", d: "Identifique o gatilho que te faz comer doce ou procrastinar. Qual é o sinal?" },
         { t: "Dia 6: Mielinização", c: "A repetição isola os neurônios. Quanto mais você repete, mais fácil fica agir corretamente.", d: "Qual habilidade nova você vai repetir hoje, mesmo que sinta preguiça?" },
         { t: "Dia 7: Fadiga de Decisão", c: "Decidir cansa. Use suas manhãs para o que é difícil e deixe o automático para a noite.", d: "Escolha sua roupa e refeições para amanhã ainda hoje. Como isso libera sua mente?" },
@@ -203,7 +201,7 @@
         { t: "Dia 9: Higiene do Sono", c: "Seu cérebro se limpa à noite. Sem sono, você acorda com o cérebro 'sujo' de toxinas.", d: "Desligue as telas 1 hora antes de dormir hoje. Anote se o despertar foi melhor." },
         { t: "Dia 10: Viés de Confirmação", c: "Nós buscamos o que já acreditamos. Se você se acha incapaz, seu cérebro vai ignorar suas vitórias.", d: "Liste 3 sucessos pequenos que você teve hoje e que sua mente tentou ignorar." },
         { t: "Dia 11: O Córtex Pré-Frontal", c: "Ele é o CEO da sua vida. Mas ele precisa de glicose e descanso para trabalhar bem.", d: "Identifique uma tarefa que você adiou. Divida-a em 3 partes minúsculas." },
-        { t: "Dia 12: Sistema de Luta ou Fuga", c: "Seu corpo não sabe a diferença entre um leão e um boleto atrasado.", d: "Quando sentir medo hoje, pergunte: 'Há um risco real de vida ou é apenas meu ego?'" },
+        { t: "Dia 12: Sistema de Luta ou Fuga", c: "Sua Mente não sabe a diferença entre um leão e um boleto atrasado.", d: "Quando sentir medo hoje, pergunte: 'Há um risco real de vida ou é apenas meu ego?'" },
         { t: "Dia 13: Memória Muscular", c: "O corpo aprende antes da mente consciente em muitos casos.", d: "Tente realizar uma tarefa cotidiana com a mão não dominante. Observe seu foco aumentar." },
         { t: "Dia 14: Neurotransmissores", c: "Serotonina e bem-estar. O que você come afeta como você sente.", d: "Coma algo nutritivo e evite processados por 24h. Note a clareza mental." },
         { t: "Dia 15: O Poder do Não", c: "Cada 'sim' para os outros é um 'não' para os seus objetivos neurais.", d: "Diga um 'não' educado para algo que drena seu tempo hoje." },
@@ -283,6 +281,10 @@
     }
 
     function move(step) {
+        if (cur === 1 && step === -1) {
+            goTo('p-capa');
+            return;
+        }
         let next = cur + step;
         if(next >= 1 && next <= 22) goTo('p' + next);
     }
