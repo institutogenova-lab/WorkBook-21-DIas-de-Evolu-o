@@ -84,15 +84,13 @@
             <div class="index-item" onclick="goTo('p-ch3')">3. Hábitos e recompensas</div>
             <div class="index-item" onclick="goTo('p-ch4')">4. Tomada de decisão</div>
             <div class="index-item" onclick="goTo('p-ch5')">5. Cérebro, estresse e autocontrole</div>
-            <div class="index-item" onclick="goTo('p-ch6')">6. Plano prático de aplicação</div>
-            <div class="index-item" onclick="goTo('p-ch7')">7. Considerações finais</div>
-            <div class="index-item" onclick="goTo('p-ch8')">8. Sobre a autora</div>
+            <div class="index-item" onclick="goTo('p-ch9')">6. O Universo das Crenças</div>
+            <div class="index-item" onclick="goTo('p-ch11')">7. A Natureza dos Padrões</div>
+            <div class="index-item" onclick="goTo('p-ch6')">8. Plano prático de aplicação</div>
+            <div class="index-item" onclick="goTo('p-ch7')">9. Considerações finais</div>
+            <div class="index-item" onclick="goTo('p-ch8')">10. Sobre a autora</div>
             
             <div id="challenge-list" style="margin-top:20px; border-top: 2px solid #eee; padding-top:10px;"></div>
-            
-            <div id="challenge-btn-index" class="index-item" onclick="resumeChallenge()" style="color:var(--gold); font-weight:bold; border-top: 2px solid #eee; margin-top: 15px; padding-top: 15px; text-align: center;">
-                ➔ CONTINUAR JORNADA 21 DIAS
-            </div>
             
             <button class="btn btn-reset" onclick="resetProgress()">REINICIAR TUDO</button>
         </div>
@@ -142,11 +140,52 @@
             <p>Sob estresse, o cérebro libera cortisol. Se o estresse se torna crônico, reduz a capacidade de autocontrole. O autocontrole não é apenas espiritual, ele também é fisiológico.</p>
             <div class="bible-quote">“Porque Deus não nos deu espírito de medo, mas de poder, amor e equilíbrio.” — 2 Timóteo 1:7</div>
             <p>Práticas como respiração consciente, oração e escrita emocional ajudam a regular o sistema nervoso.</p>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch9')">Próximo Capítulo</button>
+        </div>
+
+        <div id="p-ch9" class="page">
+            <h2>6. O UNIVERSO DAS CRENÇAS: DEFINIÇÃO E ESTRUTURA</h2>
+            <p>As crenças são significados que atribuímos a fatos e a nós mesmos. Elas funcionam como "verdades" internas que determinam nosso comportamento.</p>
+            <p><strong>Os Três Pilares:</strong></p>
+            <ul>
+                <li><strong>Capacidade:</strong> O que acredito que consigo fazer.</li>
+                <li><strong>Possibilidade:</strong> O que acredito que é permitido acontecer.</li>
+                <li><strong>Merecimento:</strong> O que acredito que sou digno de receber.</li>
+            </ul>
+            <div class="bible-quote">“Se podes crer, tudo é possível ao que crê.” — Marcos 9:23</div>
+            <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch11')">Próximo Capítulo</button>
+        </div>
+
+        <div id="p-ch11" class="page">
+            <h2>7. A NATUREZA DOS PADRÕES DE COMPORTAMENTO</h2>
+            <p>Padrões de comportamento são respostas e reações automáticas que manifestamos. Na maioria das vezes, operam de forma inconsciente, moldando nossas escolhas sem que percebamos a origem.</p>
+            
+            <p><strong>Fontes dos Padrões (Imprints):</strong></p>
+            <ul>
+                <li><strong>Ancestralidade:</strong> Heranças genéticas e conexões familiares.</li>
+                <li><strong>Início da Vida:</strong> Concepção e nascimento. Se o parto foi uma "luta", o sistema pode crer que a vida também deve ser uma luta constante.</li>
+                <li><strong>Infância:</strong> Período em que o ego ainda não filtra o que é baseado no medo ou no amor.</li>
+            </ul>
+
+            <div class="challenge-box" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+                <h3 style="font-size: 1.2rem; margin-top: 0;">O Desafio da Mudança</h3>
+                <p style="font-size: 1rem;">O processo de mudança pode ser demorado por alguns motivos cruciais:</p>
+                <ul style="font-size: 1rem;">
+                    <li><strong>Velocidade Diferenciada:</strong> A mente racional compreende a necessidade de mudar muito mais rápido do que o comportamento inconsciente consegue acompanhar.</li>
+                    <li><strong>Profundidade das Decisões:</strong> Decisões estabelecidas na infância criam raízes difíceis de acessar apenas com o intelecto.</li>
+                    <li><strong>Necessidade de Ferramentas:</strong> É preciso técnicas de cura emocional para chegar onde a lógica comum não alcança.</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>Conclusão:</strong> Compreender a meta do crescimento pessoal é simples, mas atingi-la exige paciência para reprogramar hábitos gravados no sistema muito antes de termos consciência deles.</p>
+
+            <div class="bible-quote">“E vos renoveis no espírito da vossa mente.” — Efésios 4:23</div>
+            
             <button class="btn btn-next" style="width:100%" onclick="goTo('p-ch6')">Próximo Capítulo</button>
         </div>
 
         <div id="p-ch6" class="page">
-            <h2>6. PLANO PRÁTICO DE APLICAÇÃO</h2>
+            <h2>8. PLANO PRÁTICO DE APLICAÇÃO</h2>
             <ol>
                 <li>Observe suas emoções</li>
                 <li>Identifique gatilhos</li>
@@ -158,13 +197,13 @@
         </div>
 
         <div id="p-ch7" class="page">
-            <h2>7. CONSIDERAÇÕES FINAIS</h2>
+            <h2>9. CONSIDERAÇÕES FINAIS</h2>
             <p>Emoções não são inimigas. São sinais. Quando ignoradas, nos dominam. Quando compreendidas, nos fortalecem. Amadurecer é aprender a responder, não apenas reagir.</p>
             <button class="btn btn-gold" onclick="goTo('p-ch8')">Sobre a Autora</button>
         </div>
 
         <div id="p-ch8" class="page">
-            <h2>8. SOBRE A AUTORA</h2>
+            <h2>10. SOBRE A AUTORA</h2>
             <img src="autora.png" class="img-autora" alt="Joyce Genova">
             <p><strong>Joyce Genova</strong> é Head Trainer, Master Coach, Rebirther e Heart Coherencer. Especialista em desenvolvimento emocional feminino, dedica-se a ajudar mulheres a curarem traumas e promover equilíbrio entre corpo, alma e espírito.</p>
             <button class="btn btn-next" style="width:100%; background: var(--gold);" onclick="resumeChallenge()">Ir para a Jornada 21 Dias</button>
@@ -262,7 +301,6 @@
         const list = document.getElementById('challenge-list'); if(!list) return;
         list.innerHTML = '<h3 style="color:var(--gold)">Jornada 21 Dias</h3>';
         let lastDate = localStorage.getItem('joyce_date'), unlockedDay = parseInt(localStorage.getItem('joyce_unlocked_day')) || 1, today = new Date().toDateString();
-        document.getElementById('challenge-btn-index').innerHTML = (unlockedDay > 21) ? "➔ VER MENSAGEM FINAL" : "➔ CONTINUAR JORNADA 21 DIAS";
         conteudos.forEach((item, index) => {
             let d = index + 1, div = document.createElement('div');
             if(d < unlockedDay) { div.className = 'index-item'; div.innerHTML = `✅ Dia ${d}: ${item.t}`; div.onclick = () => goTo('day-'+d); }
